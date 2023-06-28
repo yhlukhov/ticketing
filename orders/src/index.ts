@@ -22,7 +22,6 @@ const start = async () => {
 
   // START
   try {
-    console.log('START!')
     await natsWrapper.connect(process.env.NATS_CLUSTER_ID, process.env.NATS_CLIENT_ID, {
       url: process.env.NATS_URL,
     })
@@ -36,11 +35,10 @@ const start = async () => {
 
     // Connect to Mongo DB
     await mongoose.connect(process.env.MONGO_URI)
-    console.log('Connected to Mongodb')
 
     // Initialize listeners
-    new TicketCreatedListener(natsWrapper.client)
-    new TicketUpdatedListener(natsWrapper.client)
+    new TicketCreatedListener(natsWrapper.client).listen()
+    new TicketUpdatedListener(natsWrapper.client).listen()
   } catch (err) {
     console.log(err)
   }

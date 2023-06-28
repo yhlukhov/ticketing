@@ -21,7 +21,6 @@ const start = async () => {
 
   // START
   try {
-    console.log('START!')
     await natsWrapper.connect(process.env.NATS_CLUSTER_ID, process.env.NATS_CLIENT_ID, {
       url: process.env.NATS_URL,
     })
@@ -33,7 +32,6 @@ const start = async () => {
     process.on('SIGTERM', () => natsWrapper.client.close())
 
     await mongoose.connect(process.env.MONGO_URI)
-    console.log('Connected to Mongodb')
   } catch (err) {
     console.error(err)
   }
