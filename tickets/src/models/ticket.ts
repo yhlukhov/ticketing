@@ -30,6 +30,7 @@ const ticketSchema = new Schema({
     }
   }
 })
+
 ticketSchema.set('versionKey', 'version')
 ticketSchema.plugin(updateIfCurrentPlugin)
 

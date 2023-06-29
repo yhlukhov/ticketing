@@ -1,7 +1,7 @@
 import { model, Model, Schema, Document } from 'mongoose'
 import { OrderStatus } from '@yh-tickets/common'
 import { TicketDoc } from './ticket'
-export {OrderStatus}
+export { OrderStatus }
 
 interface OrderAttrs {
   userId: string
