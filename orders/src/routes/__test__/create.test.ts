@@ -3,6 +3,7 @@ import { Types } from 'mongoose'
 import { Ticket, Order, OrderStatus } from '../../models'
 import { app } from '../../app'
 import { natsWrapper } from '../../nats-wrapper'
+const mongoId = () => new Types.ObjectId().toHexString()
 
 it('has a route handler', async () => {
   const response = await request(app).post('/api/orders').send({})
@@ -25,6 +26,7 @@ it('returns an error if the ticket does not exist', async () => {
 
 it('returns an error if the ticket is already reserved', async () => {
   const ticket = await Ticket.build({
+    id: mongoId(),
     title: 'Concert',
     price: 20,
   }).save()
@@ -47,6 +49,7 @@ it('returns an error if the ticket is already reserved', async () => {
 
 it('reserves the ticket', async () => {
   const ticket = await Ticket.build({
+    id: mongoId(),
     title: 'Concert',
     price: 20,
   }).save()
@@ -62,6 +65,7 @@ it('reserves the ticket', async () => {
 
 it('emits an order created event', async () => {
   const ticket = await Ticket.build({
+    id: mongoId(),
     title: 'Concert',
     price: 20,
   }).save()
