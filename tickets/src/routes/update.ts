@@ -8,8 +8,8 @@ import {
   BadRequestError,
 } from '@yh-tickets/common'
 import { Ticket } from '../models'
-import {natsWrapper} from '../nats-wrapper'
-import {TicketUpdatedPublisher} from '../events/publishers'
+import { natsWrapper } from '../nats-wrapper'
+import { TicketUpdatedPublisher } from '../events/publishers'
 
 const router = Router()
 
@@ -41,13 +41,12 @@ router.put(
     ticket.set({ title, price })
     await ticket.save()
 
-    const publisher = new TicketUpdatedPublisher(natsWrapper.client)
-    publisher.publish({
+    await new TicketUpdatedPublisher(natsWrapper.client).publish({
       id: ticket.id,
       title: ticket.title,
       price: ticket.price,
       userId: ticket.userId,
-      version: ticket.version
+      version: ticket.version,
     })
 
     res.send(ticket)

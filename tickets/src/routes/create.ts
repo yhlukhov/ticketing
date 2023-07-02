@@ -27,7 +27,7 @@ router.post(
     })
     await ticket.save()
 
-    //* Publish an event saying the ticket was created
+    // Publish an event saying the ticket was created
 
     await new TicketCreatedPublisher(natsWrapper.client).publish({
       id: ticket.id,
