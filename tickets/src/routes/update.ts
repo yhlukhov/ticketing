@@ -5,6 +5,7 @@ import {
   validateRequest,
   NotFoundError,
   NotAuthorizedError,
+  BadRequestError,
 } from '@yh-tickets/common'
 import { Ticket } from '../models'
 import {natsWrapper} from '../nats-wrapper'
@@ -25,13 +26,15 @@ router.put(
   async (req: Request, res: Response) => {
     const { id } = req.params
     const ticket = await Ticket.findById(id)
+
     if (!ticket) {
       throw new NotFoundError()
     }
-    console.log(ticket.userId)
-    console.log(req.currentUser!.id)
     if (ticket.userId !== req.currentUser!.id) {
       throw new NotAuthorizedError()
+    }
+    if (ticket.orderId) {
+      throw new BadRequestError('Ticket has already been reserved')
     }
 
     const { title, price } = req.body
