@@ -32,6 +32,9 @@ const start = async () => {
     process.on('SIGTERM', () => natsWrapper.client.close())
 
     await mongoose.connect(process.env.MONGO_URI)
+
+    // Create listeners
+    
   } catch (err) {
     console.error(err)
   }
