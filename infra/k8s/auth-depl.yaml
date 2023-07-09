@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: gcr.io/ticketing-dev-382511/auth # for GCP usage
+          image: gcr.io/ticketing-dev-392017/auth # for GCP usage
           env:
             - name: MONGO_URI
               value: 'mongodb://auth-mongo-srv:27017/auth'

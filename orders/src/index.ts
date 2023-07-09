@@ -1,7 +1,11 @@
 import mongoose from 'mongoose'
 import { natsWrapper } from './nats-wrapper'
-import { TicketCreatedListener, TicketUpdatedListener } from './events/listeners'
 import { app } from './app'
+import {
+  TicketCreatedListener,
+  TicketUpdatedListener,
+  OrderExpiredListener,
+} from './events/listeners'
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
@@ -39,6 +43,7 @@ const start = async () => {
     // Initialize listeners
     new TicketCreatedListener(natsWrapper.client).listen()
     new TicketUpdatedListener(natsWrapper.client).listen()
+    new OrderExpiredListener(natsWrapper.client).listen()
   } catch (err) {
     console.log(err)
   }

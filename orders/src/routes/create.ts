@@ -11,7 +11,7 @@ import { Types } from 'mongoose'
 import { Order, Ticket } from '../models'
 import { OrderCreatedPublisher } from '../events/publishers'
 import { natsWrapper } from '../nats-wrapper'
-const EXPIRATION_MINS = 15
+const EXPIRATION_MINS = 1 //! 15
 
 const router = express.Router()
 

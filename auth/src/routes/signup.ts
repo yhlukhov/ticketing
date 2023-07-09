@@ -1,6 +1,6 @@
-import express, { Request, Response } from "express"
-import { body } from "express-validator"
 import jwt from 'jsonwebtoken'
+import { body } from "express-validator"
+import express, { Request, Response } from "express"
 import { validateRequest, BadRequestError } from "@yh-tickets/common"
 import { User } from "../models"
 
