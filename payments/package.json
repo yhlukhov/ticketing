@@ -9,6 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@yh-tickets/common": "^1.0.21"
+    "@types/jsonwebtoken": "^9.0.2",
+    "@yh-tickets/common": "^1.0.21",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.3.2",
+    "node-nats-streaming": "^0.3.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.2",
+    "jest": "^29.6.1",
+    "mongodb-memory-server": "^8.13.0"
   }
 }
