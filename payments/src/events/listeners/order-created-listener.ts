@@ -2,7 +2,7 @@ import {Listener, OrderCreatedEvent, OrderStatus, Subjects} from '@yh-tickets/co
 import {queueGroupName} from './queue-group-name'
 import { Message } from 'node-nats-streaming'
 
-class OrderCreatedListener extends Listener<OrderCreatedEvent> {
+export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
   readonly subject = Subjects.OrderCreated
   queueGroupName = queueGroupName
   async onMessage(data: OrderCreatedEvent['data'], msg: Message) {

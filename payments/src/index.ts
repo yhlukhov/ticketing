@@ -1,10 +1,10 @@
 import mongoose from 'mongoose'
 import { natsWrapper } from './nats-wrapper'
 import { app } from './app'
-import { OrderCreatedListener } from './events/listeners'
-import { OrderCancelledListener } from './events/listeners/order-cancelled-listener'
+import { OrderCreatedListener, OrderCancelledListener } from './events/listeners'
 
 const start = async () => {
+  console.log('PROCESS>ENV: ', process.env)
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY undefined')
   }
@@ -36,7 +36,6 @@ const start = async () => {
 
     new OrderCreatedListener(natsWrapper.client).listen()
     new OrderCancelledListener(natsWrapper.client).listen()
-    
   } catch (err) {
     console.error(err)
   }

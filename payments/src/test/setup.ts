@@ -9,7 +9,7 @@ declare global {
 // Mocking usage of nats-wrapper on test environment
 // It will replace actual nats-wrapper with one defined in
 // src/__mocks__/nats-wrapper.ts (with same file name)
-jest.mock('../nats-wrapper') 
+jest.mock('../nats-wrapper')
 
 let mongo: any
 
@@ -22,21 +22,19 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   const collections = await connection.db.collections()
-  for (let collection of collections) {
+  collections.forEach((collection) => {
     collection.deleteMany({})
-  }
+  })
   jest.clearAllMocks()
 })
 
 afterAll(async () => {
-  if (mongo) {
-    await mongo.stop()
-  }
+  mongo && (await mongo.stop())
   await connection.close()
 })
 
 global.signup = () => {
-  // Build JWT payload {id, email}
+  // JWT payload {id, email}
   const payload = {
     id: new Types.ObjectId().toHexString(),
     email: 'test@gmail.com',
