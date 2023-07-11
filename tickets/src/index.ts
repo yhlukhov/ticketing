@@ -21,7 +21,6 @@ const start = async () => {
     throw new Error('NATS_CLIENT_ID undefined')
   }
 
-  // START
   try {
     await natsWrapper.connect(process.env.NATS_CLUSTER_ID, process.env.NATS_CLIENT_ID, {
       url: process.env.NATS_URL,

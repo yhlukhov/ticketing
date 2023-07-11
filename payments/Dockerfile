@@ -8,4 +8,4 @@ RUN npm install --only=prod
 
 COPY . .
 
-RUN [ "npm", "start" ]
+CMD [ "npm", "start" ]

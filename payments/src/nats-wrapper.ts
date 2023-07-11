@@ -1,11 +1,11 @@
-import { connect, Stan, StanOptions } from 'node-nats-streaming'
+import { StanOptions, Stan, connect } from 'node-nats-streaming'
 
 class NatsWrapper {
   private _client?: Stan
 
   get client() {
     if (!this._client) {
-      throw new Error('Can not access NATS clent before connecting')
+      throw new Error('Cannot access NATS client before connecting')
     }
     return this._client
   }
