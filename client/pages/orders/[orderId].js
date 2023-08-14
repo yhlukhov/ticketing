@@ -14,7 +14,6 @@ const OrderDetails = ({order, currentUser, STRIPE_PUBLISHABLE_KEY}) => {
       orderId: order.id
     },
     onSuccess: (payment) => {
-      console.log(payment)
       router.push('/orders')
     }
   })
@@ -39,7 +38,6 @@ const OrderDetails = ({order, currentUser, STRIPE_PUBLISHABLE_KEY}) => {
           <h3>Time left to order: {timeLeft} seconds</h3>
           <StripeCheckout
             token={(token) => {
-              console.log(token)
               doRequest({token:token.id})
             }}
             stripeKey={STRIPE_PUBLISHABLE_KEY}
