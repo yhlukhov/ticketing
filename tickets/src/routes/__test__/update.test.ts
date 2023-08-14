@@ -78,7 +78,6 @@ it('returns 400 if the ticket is reserved', async () => {
     
   const {id} = response.body
   const ticket = await Ticket.findById(id)
-  console.log(ticket, id)
   await ticket!.set({ orderId: new Types.ObjectId().toHexString() }).save()
 
   await request(app)
