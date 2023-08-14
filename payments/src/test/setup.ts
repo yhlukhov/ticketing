@@ -3,13 +3,16 @@ import { connect, connection, Types } from 'mongoose'
 import jwt from 'jsonwebtoken'
 
 declare global {
-  var signup: () => string[]
+  var signup: (id?:string) => string[]
 }
 
 // Mocking usage of nats-wrapper on test environment
 // It will replace actual nats-wrapper with one defined in
 // src/__mocks__/nats-wrapper.ts (with same file name)
 jest.mock('../nats-wrapper')
+
+process.env.STRIPE_KEY =
+  'sk_test_51IlosVARwwJ1yO29Q5n8kYuIlu1kbDhrNLyxSKP0yEFAjKp3XQCrKw7m3Rt9yeEZG8qC4miB887A4fuMuLqiVAeN00MZBzPnPa'
 
 let mongo: any
 
@@ -22,21 +25,23 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   const collections = await connection.db.collections()
-  collections.forEach((collection) => {
+  for (let collection of collections) {
     collection.deleteMany({})
-  })
+  }
   jest.clearAllMocks()
 })
 
 afterAll(async () => {
-  mongo && (await mongo.stop())
+  if (mongo) {
+    await mongo.stop()
+  }
   await connection.close()
 })
 
-global.signup = () => {
-  // JWT payload {id, email}
+global.signup = (id?:string) => {
+  // Build JWT payload {id, email}
   const payload = {
-    id: new Types.ObjectId().toHexString(),
+    id: id || new Types.ObjectId().toHexString(),
     email: 'test@gmail.com',
   }
   // Create JWT

@@ -5,6 +5,7 @@ import {
   TicketCreatedListener,
   TicketUpdatedListener,
   OrderExpiredListener,
+  PaymentCreatedListener
 } from './events/listeners'
 
 const start = async () => {
@@ -44,6 +45,7 @@ const start = async () => {
     new TicketCreatedListener(natsWrapper.client).listen()
     new TicketUpdatedListener(natsWrapper.client).listen()
     new OrderExpiredListener(natsWrapper.client).listen()
+    new PaymentCreatedListener(natsWrapper.client).listen()
   } catch (err) {
     console.log(err)
   }

@@ -2,6 +2,7 @@ import express from 'express'
 import 'express-async-errors'
 import cookieSession from 'cookie-session'
 import { currentUser, errorHandler, NotFoundError } from '@yh-tickets/common'
+import { createChargeRouter } from './routes'
 
 const app = express()
 app.set('trust proxy', true)
@@ -14,7 +15,7 @@ app.use(
 )
 app.use(currentUser)
 
-//* Use routes
+app.use(createChargeRouter)
 
 app.all('*', () => {
   throw new NotFoundError()

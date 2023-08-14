@@ -21,6 +21,7 @@ kind: Service
 metadata:
   name: payments-mongo-srv
 spec:
+  type: ClusterIP #default
   selector:
     app: payments-mongo
   ports:

@@ -3,8 +3,9 @@ import { natsWrapper } from './nats-wrapper'
 import { app } from './app'
 import { OrderCreatedListener, OrderCancelledListener } from './events/listeners'
 
+
+
 const start = async () => {
-  console.log('PROCESS>ENV: ', process.env)
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY undefined')
   }
@@ -32,10 +33,10 @@ const start = async () => {
     process.on('SIGINT', () => natsWrapper.client.close())
     process.on('SIGTERM', () => natsWrapper.client.close())
 
-    await mongoose.connect(process.env.MONGO_URI)
-
     new OrderCreatedListener(natsWrapper.client).listen()
     new OrderCancelledListener(natsWrapper.client).listen()
+
+    await mongoose.connect(process.env.MONGO_URI)
   } catch (err) {
     console.error(err)
   }
@@ -43,5 +44,5 @@ const start = async () => {
 
 app.listen(3000, async () => {
   await start()
-  console.log('Tickets Service is listening on port: 3000')
+  console.log('Payments Service is listening on port: 3000')
 })
