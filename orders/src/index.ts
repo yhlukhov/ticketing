@@ -53,5 +53,5 @@ const start = async () => {
 
 app.listen(3000, async () => {
   await start()
-  console.log('Order Service is listening on port: 3000')
+  console.log('Order service is listening on port: 3000')
 })
