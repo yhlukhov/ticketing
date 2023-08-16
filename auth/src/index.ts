@@ -9,6 +9,7 @@ const start = async () => {
     throw new Error('MONGO_URI undefined')
   }
     try {
+      console.log('Starting...')
       await connect(process.env.MONGO_URI)
       console.log('Connected to Mongodb')
     } catch (err) {
