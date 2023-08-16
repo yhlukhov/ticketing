@@ -27,6 +27,7 @@ const start = async () => {
 
   // START
   try {
+    console.log('Starting...')
     await natsWrapper.connect(process.env.NATS_CLUSTER_ID, process.env.NATS_CLIENT_ID, {
       url: process.env.NATS_URL,
     })
@@ -53,5 +54,5 @@ const start = async () => {
 
 app.listen(3000, async () => {
   await start()
-  console.log('Order service is listening on port: 3000')
+  console.log('Order Service is listening on port: 3000')
 })
