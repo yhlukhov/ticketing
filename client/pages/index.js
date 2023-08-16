@@ -34,24 +34,8 @@ const LandingPage = ({currentUser, tickets}) => {
 
 // This is run one time on Nextjs SSR server on page load, or on the Client when browsing pages
 LandingPage.getInitialProps = async (ctx, client, currentUser) => {
-  const promise = new Promise((resolve, reject) => {
-    client.get('api/tickets')
-      .then(({data}) => {
-        resolve(data)
-      })
-      .catch((err) => {
-        reject(err)
-      })
-  })
-  return promise
-    .then(data => {
-      return {tickets:data}
-    })
-    .catch(err => {
-      return {tickets: null}
-    })
-  // const {data} = await client.get('/api/tickets')
-  // return {tickets: data}
+  const {data} = await client.get('/api/tickets')
+  return {tickets: data}
 }
 
 export default LandingPage
