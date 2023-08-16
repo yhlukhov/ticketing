@@ -6,7 +6,8 @@ export const buildClient = ({req}) => {
     //* Direct request to Nginx controller: "http:SERVICENAME.NAMESPACE.svc.cluster.local"
     //* req.headers includes: {host: 'ticketing.dev', cookie:'session_cookie'}
     return axios.create({
-      baseURL: 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local',
+      // baseURL: 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local',
+      baseURL: 'http://iurii.fun/',
       headers: req.headers
     })
     //* Called from Client
